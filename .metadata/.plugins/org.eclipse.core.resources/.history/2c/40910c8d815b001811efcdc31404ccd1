@@ -1,0 +1,5 @@
+package org.proyecto.feign.feign;
+
+public class GreetingClient {
+
+}
