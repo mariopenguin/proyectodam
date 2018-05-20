@@ -21,12 +21,14 @@ public class EurekaClientApplication implements GreetingController {
 
     @Value("${spring.application.name}")
     private String appName;
-
+    @Value("${server.port}")
+    private String portNumber;
     public static void main(String[] args) {
         SpringApplication.run(EurekaClientApplication.class, args);
     }
 
     public String greeting() {
-        return String.format("Hello from '%s'!", eurekaClient.getApplication(appName).getName());
+    	return String.format("Hello from '%s with Port Number %s'!", eurekaClient.getApplication(appName)
+                .getName(), portNumber);
     }
 }
