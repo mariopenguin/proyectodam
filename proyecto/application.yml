@@ -4,3 +4,7 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+    
+instance:
+    statusPageUrlPath: ${management.context-path}/info
+    healthCheckUrlPath: ${management.context-path}/health
