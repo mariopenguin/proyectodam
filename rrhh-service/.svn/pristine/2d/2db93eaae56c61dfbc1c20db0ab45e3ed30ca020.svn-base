@@ -1,0 +1,75 @@
+package hello;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+
+
+public class UserControllerTest {
+
+
+	@Mock
+	private UserRepository userRepository;
+	
+	@InjectMocks
+	private MainController mainController;
+	private MockMvc mockMvc;
+	
+	@Before
+	public void setup() {
+		
+		MockitoAnnotations.initMocks(this);
+		
+		mockMvc = MockMvcBuilders.standaloneSetup(mainController).build();
+	}
+	@Test
+	public void testviewByName() throws Exception{
+				String name="nuevo";
+		
+		when(userRepository.findByName(name)).thenReturn(new User());
+		
+		mockMvc.perform(get("/empresa/name/nuevo"))
+			.andExpect(status().isOk());
+		
+		
+	}
+	@Test
+	public void testNotFoundEmpleado() throws Exception{
+			
+				String namefalso = "paco";
+			
+		if ((namefalso == "null")) {
+			System.out.println("AYY QUE DEVUELVO "+(userRepository.findByName(namefalso)));
+			System.out.println("el nombre no existe "+ namefalso);
+			mockMvc.perform(get("/empresa/name/'"+namefalso+"'"))
+			.andExpect(status().is2xxSuccessful()).andExpect(status().isOk());
+		}
+		else if(namefalso !=null) {
+			System.out.println(" nombre encontrado calabacin-----------"+namefalso);
+			mockMvc.perform(get("/empresa/name/'"+namefalso+"'"))
+			.andExpect(status().is2xxSuccessful()).andExpect(status().isOk());
+		}
+			
+
+	}
+	@Test
+	public void rutaIncorrrrrecta() throws Exception{
+				String name="nuevo";
+
+			when(userRepository.findByName(name)).thenReturn(new User());
+
+			mockMvc.perform(get("/empresa/namemem/popo"))
+				.andExpect(status().is4xxClientError());
+
+	}
+	
+}

@@ -1,0 +1,15 @@
+package hello;
+
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RolexRepository extends CrudRepository<Rolex, Long> {
+
+	@Query
+	Rolex findByName(String name);
+	
+	@Query
+	Rolex findById(int id);
+	
+}

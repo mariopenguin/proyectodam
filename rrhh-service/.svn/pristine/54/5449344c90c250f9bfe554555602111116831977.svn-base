@@ -1,0 +1,13 @@
+
+package testByJunit;
+
+import org.junit.Test;
+
+public class controlUsuer {
+	@Test
+	public void testUser(int n_user) {
+		
+	}
+
+	
+}

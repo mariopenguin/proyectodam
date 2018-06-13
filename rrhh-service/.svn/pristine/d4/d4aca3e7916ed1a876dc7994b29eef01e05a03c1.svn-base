@@ -1,0 +1,54 @@
+package hello;
+import java.util.Collection;
+
+import javax.persistence.*;
+
+@Entity
+public class Rolex {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String name;
+
+	@ManyToMany(mappedBy="roles")
+	private Collection <User>usuarios;
+	
+	@ManyToMany
+	@JoinTable(name="roles_privilegios",joinColumns=@JoinColumn(name="role_id",referencedColumnName="id"),inverseJoinColumns =@JoinColumn(name="privilege_id",referencedColumnName="id"))
+	private Collection <Privilege>privilegios;
+	
+	
+	
+	
+	public Rolex(String name) {
+		super();
+		this.name = name;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Collection<Privilege> getPrivilegios() {
+		return privilegios;
+	}
+	public void setPrivilegios(Collection<Privilege> privilegios) {
+		this.privilegios = privilegios;
+	}
+	public Collection<User> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(Collection<User> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+
+}

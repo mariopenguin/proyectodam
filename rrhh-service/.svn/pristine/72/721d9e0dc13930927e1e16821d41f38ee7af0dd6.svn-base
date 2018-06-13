@@ -1,0 +1,47 @@
+package hello;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
+public class CASPA {
+
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, JRException {
+		// TODO Auto-generated method stub
+
+		
+			Class.forName("com.mysql.jdbc.Driver");
+	
+	      Connection connect = (Connection) DriverManager.getConnection( 
+	         "jdbc:mysql://localhost:3306/persianas" , 
+	         "springuser" , 
+	         "ThePassword"
+	      );
+	     // JasperReport jr = null;
+	        
+      	
+				//jr= (JasperReport) JRLoader.loadObjectFromFile("C:\\Users\\FERNANDOA.JURADO\\eclipse-workspace\\patata\\ficheroJasper.pdf");
+				JasperPrint jp =(JasperPrint) JasperFillManager.fillReport("C:\\Users\\FERNANDOA.JURADO\\eclipse-workspace\\patata\\src\\main\\java\\jasperReporter\\Invoice.jasper",null,connect);
+				//JasperViewer jv = new JasperViewer(jp);
+				//jv.setVisible(true);
+				//jv.setTitle("the marios´s");
+				JasperCompileManager.compileReportToFile("C:\\Users\\FERNANDOA.JURADO\\eclipse-workspace\\patata\\src\\main\\java\\jasperReporter\\Invoice.jrxml","C:\\Users\\FERNANDOA.JURADO\\eclipse-workspace\\patata\\src\\main\\java\\jasperReporter\\Invoice.jasper");
+				JasperExportManager.exportReportToPdfFile(jp,"C:\\\\Users\\\\FERNANDOA.JURADO\\ficheroJasper.pdf");
+				connect.close();
+				System.out.println("PDF CASPOSO");
+	
+      
+	}
+
+}

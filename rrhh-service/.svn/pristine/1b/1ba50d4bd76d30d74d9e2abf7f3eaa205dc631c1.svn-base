@@ -1,0 +1,45 @@
+package hello;
+import java.util.Collection;
+
+import javax.persistence.*;
+
+@Entity
+public class Privilege {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String name;
+
+	@ManyToMany(mappedBy="privilegios")
+	private Collection <Rolex>roles;
+	
+	
+	
+	
+	public Privilege(String name) {
+		super();
+		this.name = name;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Collection<Rolex> getRoles() {
+		return roles;
+	}
+	public void setRoles(Collection<Rolex> roles) {
+		this.roles = roles;
+	}
+	
+	
+	
+}
